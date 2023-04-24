@@ -12,9 +12,24 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ShopServiceImpl extends ServiceImpl<ShopMapper, Shop> implements IShopService {
+
+//    @Resource
+//    private StringRedis
     @Override
     public Result queryShopById(Long id) {
         // 1.从redis中查询商铺缓存
+
+        // 2.判断是否存在
+
+        // 3.存在直接返回
+
+        // 4.不存在根据id,在数据库中查
+
+        // 5.不存在返回错误
+
+        // 6.存在，写入 redis
+
+        // 7.返回
         return null;
     }
 }
