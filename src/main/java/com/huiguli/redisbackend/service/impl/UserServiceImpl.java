@@ -11,8 +11,10 @@ import com.huiguli.redisbackend.mapper.UserMapper;
 import com.huiguli.redisbackend.service.IUserService;
 import com.huiguli.redisbackend.utils.RegexUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import static com.huiguli.redisbackend.constant.SystemConstants.USER_NICK_NAME_PREFIX;
@@ -33,7 +35,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         }
         //3.符合，生成验证码(利用hutool工具)
         String code = RandomUtil.randomNumbers(6);
-        //4.保存验证码到session中
+        //4.保存验证码到 session 中
         session.setAttribute("code", code);
         //5.发送验证码(需调用第三方平台)
         log.debug("模拟发送验证码成功，验证码：{}",code);
