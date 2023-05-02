@@ -8,5 +8,7 @@ import com.huiguli.redisbackend.entity.Shop;
  * @author huiguli
  */
 public interface IShopService extends IService<Shop> {
-    public Result queryShopById(Long id);
+     Result queryById(Long id);
+
+     Result update(Shop shop);
 }
