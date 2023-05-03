@@ -33,8 +33,9 @@ public class ShopController {
      */
     @GetMapping("/{id}")
     public Result queryById(@PathVariable("id") Long id) {
-//        return Result.ok(shopService.getById(id));
+        // shopService.getById(id) 猜想是json封装问题，把data又封装在data中了，导致前端不能正确解析json
         return Result.ok(shopService.queryById(id));
+//        return Result.ok(shopService.getById(id));
     }
 
 
@@ -59,7 +60,7 @@ public class ShopController {
     @PutMapping
     public Result updateShop(@RequestBody Shop shop) {
         // 写入数据库
-//        shopService.updateById(shop);
+        // shopService.updateById(shop)
         return shopService.update(shop);
     }
 
