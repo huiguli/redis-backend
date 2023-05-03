@@ -1,6 +1,8 @@
 package com.huiguli.redisbackend.service.impl;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.huiguli.redisbackend.constant.SystemConstants;
 import com.huiguli.redisbackend.dto.Result;
 import com.huiguli.redisbackend.dto.UserDTO;
 import com.huiguli.redisbackend.entity.Blog;
@@ -12,6 +14,7 @@ import com.huiguli.redisbackend.utils.UserHolder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author huiguli
@@ -34,6 +37,20 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements IB
 //        isBlogLiked(blog);
         return Result.ok(blog);
     }
+
+    @Override
+    public Result queryHotBlog(Integer current) {
+        // 根据用户查询
+        Page<Blog> page = query()
+                .orderByDesc("liked")
+                .page(new Page<>(current, SystemConstants.MAX_PAGE_SIZE));
+        // 获取当前页数据
+        List<Blog> records = page.getRecords();
+        // 查询用户
+        records.forEach(this::queryBlogUser);
+        return Result.ok(records);
+    }
+
     private void queryBlogUser(Blog blog) {
         Long userId = blog.getUserId();
         User user = userService.getById(userId);
