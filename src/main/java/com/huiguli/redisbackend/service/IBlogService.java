@@ -9,4 +9,6 @@ import com.huiguli.redisbackend.entity.Blog;
  */
 public interface IBlogService extends IService<Blog> {
     Result queryBlogById(Long id);
+
+//    Result saveBlog(Blog blog);
 }
