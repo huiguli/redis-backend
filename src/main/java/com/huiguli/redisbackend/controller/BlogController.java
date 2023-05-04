@@ -26,6 +26,10 @@ public class BlogController {
     @Resource
     private IUserService userService;
 
+    @PostMapping
+    public Result saveBlog(@RequestBody Blog blog) {
+        return blogService.saveBlog(blog);
+    }
 
     @GetMapping("/{id}")
     public Result queryBlogById(@PathVariable("id") Long id) {
@@ -69,5 +73,12 @@ public class BlogController {
     @GetMapping("/likes/{id}")
     public Result queryBlogLikes(@PathVariable("id") Long id) {
         return blogService.queryBlogLikes(id);
+    }
+
+    @GetMapping("/of/follow")
+    public Result queryBlogOfFollow(
+            @RequestParam("lastId") Long max, @RequestParam(value = "offset", defaultValue = "0") Integer offset){
+        // 关注的博主推送的文章
+        return blogService.queryBlogOfFollow(max, offset);
     }
 }
