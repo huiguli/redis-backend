@@ -76,7 +76,7 @@ String key = BLOG_LIKED_KEY + id;
 
 - **实现共同关注：**利用 Redis 恰当的数据结构。当前用户id 和 博主id关注的一个**交集**（set）
 
-  - 改造关注接口：关注一个博主，不仅保存到数据中，也将其保存到redis中（key：当前用户id，value：当前用户关注的所有博主）利用 **set **数据结构的 **intersect** 求交集
+  - 改造关注接口：关注一个博主，不仅保存到数据中，也将其保存到redis中（key：当前用户id，value：当前用户关注的所有博主）利用 **set**数据结构的 **intersect** 求交集
 
   ~~~java
   // 1. 获取登录用户Id
